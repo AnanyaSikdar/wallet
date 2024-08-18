@@ -1,0 +1,37 @@
+import React, { useState } from 'react';
+import { ethers } from 'ethers';
+
+function TokenTransfer({ walletAddress }) {
+  const [recipient, setRecipient] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const transferToken = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(tokenAddress, tokenAbi, signer);
+    const tx = await contract.transfer(recipient, ethers.utils.parseUnits(amount, tokenDecimals));
+    await tx.wait();
+    alert('Transfer successful!');
+  };
+
+  return (
+    <div>
+      <h3>Transfer Tokens</h3>
+      <input
+        type="text"
+        placeholder="Recipient address"
+        value={recipient}
+        onChange={(e) => setRecipient(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Amount to transfer"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+      <button onClick={transferToken}>Transfer</button>
+    </div>
+  );
+}
+
+export default TokenTransfer;
