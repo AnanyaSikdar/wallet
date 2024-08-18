@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+
+function HistoricalData() {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [historicalData, setHistoricalData] = useState([]);
+
+  const fetchHistoricalData = async () => {
+    // Placeholder for fetching historical data
+    // Use an API like Etherscan to fetch historical balances within the date range
+  };
+
+  return (
+    <div>
+      <h3>Historical Data</h3>
+      <input
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+      />
+      <input
+        type="date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+      />
+      <button onClick={fetchHistoricalData}>Fetch Data</button>
+      <div>
+        {/* Display historical data in a chart or table */}
+      </div>
+    </div>
+  );
+}
+
+export default HistoricalData;
